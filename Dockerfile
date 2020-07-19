@@ -20,9 +20,7 @@ RUN apk add --no-cache --update git curl unzip build-base autoconf automake libt
     && unzip -o $PROTOC_ZIP -d /usr/local 'include/*' \
     && rm -f $PROTOC_ZIP \
     && go mod download \
-    && cd cmd \
-    && ./compile.sh \
-    && cd -
+    && cmd/compile.sh
 RUN go build -o cmd/start cmd/start.go
 
 EXPOSE 80
