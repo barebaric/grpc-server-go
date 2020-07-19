@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/barebaric/grpc-server-go/proto"
+	"grpc-server-go/proto"
 	"go.uber.org/zap"
 )
 

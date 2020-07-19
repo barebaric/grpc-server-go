@@ -8,8 +8,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/barebaric/grpc-server-go/proto"
-	"github.com/barebaric/grpc-server-go/pkg/server"
+	"grpc-server-go/proto"
+	"grpc-server-go/pkg/server"
 	"github.com/oklog/oklog/pkg/group"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
