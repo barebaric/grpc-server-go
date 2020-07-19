@@ -6,7 +6,8 @@ Example usage:
 
 ```docker
 FROM knipknap/grpc-server-go:latest
-COPY go.mod pkg /app
+COPY go.mod /app/
+COPY pkg /app/
 COPY service.proto /app/proto/
 ```
 
