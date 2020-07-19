@@ -6,7 +6,6 @@ require (
 	github.com/golang/protobuf v1.4.2
 	github.com/oklog/oklog v0.3.2
 	github.com/oklog/run v1.1.0 // indirect
-	github.com/teambition/rrule-go v1.6.0
 	go.uber.org/zap v1.15.0
 	golang.org/x/sys v0.0.0-20190624142023-c5567b49c5d0 // indirect
 	golang.org/x/text v0.3.2 // indirect
