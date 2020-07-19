@@ -21,7 +21,6 @@ RUN apk add --no-cache --update git curl unzip build-base autoconf automake libt
     && rm -f $PROTOC_ZIP \
     && go mod download \
     && cmd/compile.sh
-RUN go build -o cmd/start cmd/start.go
 
 EXPOSE 80
 CMD ["./entrypoint.sh"]
