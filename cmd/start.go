@@ -13,6 +13,7 @@ import (
 	"github.com/oklog/oklog/pkg/group"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/grpclog"
 	"google.golang.org/grpc/reflection"
 )
 
@@ -20,8 +21,15 @@ var (
 	port = flag.Int("port", 80, "The server port")
 )
 
+var log grpclog.LoggerV2
+
+func init() {
+	log = grpclog.NewLoggerV2(os.Stdout, os.Stderr, os.Stderr)
+	grpclog.SetLoggerV2(log)
+}
+
 func main() {
-	logger, _ := zap.NewProduction()
+	logger, _ := zap.NewDevelopment()
 	defer logger.Sync() // flushes buffer, if any
 	sugar := logger.Sugar()
 	flag.Parse()
