@@ -5,7 +5,7 @@ ENV PROTOC_ZIP=protoc-3.12.3-linux-x86_64.zip
 ENV GO111MODULE=on 
 
 WORKDIR /app
-COPY go.mod .
+COPY go.mod entrypoint.sh ./
 COPY cmd cmd
 COPY proto proto
 COPY pkg pkg
@@ -26,4 +26,4 @@ RUN apk add --no-cache --update git curl unzip build-base autoconf automake libt
 RUN go build -o cmd/start cmd/start.go
 
 EXPOSE 80
-CMD ["cd cmd && ./compile.sh && ./start"]
+CMD ["./entrypoint.sh"]
