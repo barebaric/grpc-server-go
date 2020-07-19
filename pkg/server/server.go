@@ -1,7 +1,7 @@
 package server
 
 import (
-	"grpc-server-go/proto"
+	"grpc-server-go.localhost/proto"
 	"go.uber.org/zap"
 )
 
