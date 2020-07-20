@@ -1,4 +1,4 @@
-module grpc-server-go.localhost
+module grpc-server-go.local
 
 go 1.14
 

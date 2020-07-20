@@ -1,16 +1,16 @@
-package server
+package service
 
 import (
-	"grpc-server-go.localhost/proto"
+	"grpc-server-go.local/proto"
 	"go.uber.org/zap"
 )
 
-type MicroModel struct {
+type service struct {
 	logger *zap.Logger
 }
 
 func New(logger *zap.Logger) proto.ServiceServer {
-	return &MicroModel{
+	return &service{
 		logger: logger,
 	}
 }
