@@ -6,9 +6,10 @@ Example usage:
 
 ```docker
 FROM knipknap/grpc-server-go:latest
-COPY go.mod /app/
-COPY pkg /app/
-COPY service.proto /app/proto/
+WORKDIR /app
+COPY go.mod .
+COPY pkg pkg
+COPY service.proto proto/
 ```
 
 Any .proto files that you put into the /proto folder will automatically be compiled on startup,

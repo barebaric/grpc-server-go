@@ -5,16 +5,12 @@ import (
 	"go.uber.org/zap"
 )
 
-// Server is the service that implements the grpc service interface
-type server struct {
+type MicroModel struct {
 	logger *zap.Logger
-	suggar *zap.SugaredLogger
 }
 
-// NewServiceServer returns an implementation of ServiceServer
-func NewServiceServer(logger *zap.Logger) proto.ServiceServer {
-	return &server{
+func New(logger *zap.Logger) proto.ServiceServer {
+	return &MicroModel{
 		logger: logger,
-		suggar: logger.Sugar(),
 	}
 }
