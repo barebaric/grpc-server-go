@@ -29,8 +29,9 @@ func init() {
 }
 
 func main() {
-	logger, _ := zap.NewDevelopment().Sugar()
+	logger, _ := zap.NewDevelopment()
 	defer logger.Sync() // flushes buffer, if any
+	sugar := logger.Sugar()
 	flag.Parse()
 
 	// clearly demarcates the scope in which each listener/socket may be used.
@@ -39,17 +40,17 @@ func main() {
 		// The gRPC listener mounts the Go kit gRPC server we created.
 		grpcListener, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 		if err != nil {
-			logger.Errorw("failed to listen grpc", "during", "Listen", "err", err)
+			sugar.Errorw("failed to listen grpc", "during", "Listen", "err", err)
 			os.Exit(1)
 		}
 		g.Add(func() error {
-			logger.Infow("grpc address", "addr", fmt.Sprintf(":%d", *port))
+			sugar.Infow("grpc address", "addr", fmt.Sprintf(":%d", *port))
 
 			var opts []grpc.ServerOption
 			grpcServer := grpc.NewServer(opts...)
-			proto.RegisterServiceServer(grpcServer, service.New(logger))
+			proto.RegisterServiceServer(grpcServer, service.New(sugar))
 			reflection.Register(grpcServer)
-			logger.Infow("starting server")
+			sugar.Infow("starting server")
 			return grpcServer.Serve(grpcListener)
 		}, func(error) {
 			grpcListener.Close()
@@ -72,5 +73,5 @@ func main() {
 		})
 	}
 
-	logger.Infow("exit", "reason", g.Run())
+	sugar.Infow("exit", "reason", g.Run())
 }
