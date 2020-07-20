@@ -29,7 +29,7 @@ func init() {
 }
 
 func main() {
-	logger, _ := zap.NewDevelopment()
+	logger, _ := zap.NewDevelopment().Sugar()
 	defer logger.Sync() // flushes buffer, if any
 	flag.Parse()
 

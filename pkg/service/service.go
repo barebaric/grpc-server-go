@@ -6,10 +6,10 @@ import (
 )
 
 type service struct {
-	logger *zap.Logger
+	logger *zap.SugaredLogger
 }
 
-func New(logger *zap.Logger) proto.ServiceServer {
+func New(logger *zap.SugaredLogger) proto.ServiceServer {
 	return &service{
 		logger: logger,
 	}
