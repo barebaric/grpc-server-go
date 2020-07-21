@@ -18,8 +18,7 @@ RUN apk add --no-cache --update git curl unzip build-base autoconf automake libt
     && apk add --update protobuf \
     && curl -OL https://github.com/protocolbuffers/protobuf/releases/download/$PROTOC_VER/$PROTOC_ZIP \
     && unzip -o $PROTOC_ZIP -d /usr/local 'include/*' \
-    && rm -f $PROTOC_ZIP \
-    && ./compile.sh
+    && rm -f $PROTOC_ZIP
 
 EXPOSE 80
 CMD ["./entrypoint.sh"]

@@ -18,6 +18,6 @@ func New(logger *zap.SugaredLogger) proto.ServiceServer {
 }
 ```
 
-Any .proto files that you put into the proto/ folder are automatically be compiled on startup,
-using protoc.
+Any .proto files that you put into the proto/ folder are automatically be compiled during
+the build, using protoc.
 Similarly, your plugin is also automatically compiled on startup.

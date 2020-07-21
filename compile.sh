@@ -19,11 +19,10 @@ done
 # Build the service as a Go plugin
 cd service
 go mod download
-go build -buildmode=plugin -o service.so main.go || exit 1
+go build -buildmode=plugin -o ../server/cmd/service.so main.go || exit 1
 cd -
-ln -s ../../service/cmd/service.so server/cmd/service.so
 
-# Compile the server
+# Build the server
 cd server
 go mod download
 go build -o cmd/start cmd/start.go || exit 1
