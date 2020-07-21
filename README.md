@@ -25,3 +25,18 @@ Similarly, your plugin is also automatically compiled on startup.
 Important: The proto module is then available as
 
     github.com/barebaric/grpc-server-go/proto
+
+You can import it using the following in your mod file:
+
+```
+module your.module
+
+go 1.14
+
+require (
+	github.com/barebaric/grpc-server-go
+	...
+)
+
+replace github.com/barebaric/grpc-server-go => ../server
+```

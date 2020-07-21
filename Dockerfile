@@ -9,12 +9,11 @@ COPY compile.sh entrypoint.sh ./
 COPY server server
 COPY service service
 
-RUN apk add --no-cache --update git curl unzip build-base autoconf automake libtool ca-certificates \
+RUN apk add --no-cache --update curl unzip build-base autoconf automake libtool ca-certificates \
     && go get google.golang.org/grpc \
     && go get github.com/golang/protobuf/protoc-gen-go \
     && go get -u -v github.com/golang/protobuf/proto \
-    && apk add --update protoc \
-    && apk add --update protobuf \
+    && apk add --no-cache --update protoc protobuf \
     && curl -OL https://github.com/protocolbuffers/protobuf/releases/download/$PROTOC_VER/$PROTOC_ZIP \
     && unzip -o $PROTOC_ZIP -d /usr/local 'include/*' \
     && rm -f $PROTOC_ZIP
