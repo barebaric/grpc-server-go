@@ -8,6 +8,7 @@ import (
 	"os/signal"
 	"syscall"
 	"plugin"
+	"path/filepath"
 
 	"github.com/barebaric/grpc-server-go/proto"
 	"github.com/oklog/oklog/pkg/group"
@@ -35,10 +36,18 @@ func main() {
 	sugar := logger.Sugar()
 	flag.Parse()
 
-	// Load the service as a plugin
-	service, err := plugin.Open("service.so")
+	// Find directory of this file
+	ex, err := os.Executable()
 	if err != nil {
-		sugar.Panicw("Failed to load service plugin", err)
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+
+	// Load the service as a plugin
+	plugin_filename := filepath.Join(exPath, "service.so")
+	service, err := plugin.Open(plugin_filename)
+	if err != nil {
+		sugar.Panicw("Failed to load service plugin", plugin_filename, err)
 	}
 	NewServiceSymbol, err := service.Lookup("New")
 	if err != nil {
