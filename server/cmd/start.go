@@ -7,9 +7,9 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"plugin"
 
-	"grpc-server-go.local/proto"
-	"grpc-server-go.local/pkg/service"
+	"github.com/barebaric/grpc-server-go/proto"
 	"github.com/oklog/oklog/pkg/group"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -29,10 +29,22 @@ func init() {
 }
 
 func main() {
+	// Set up logging.
 	logger, _ := zap.NewDevelopment()
 	defer logger.Sync() // flushes buffer, if any
 	sugar := logger.Sugar()
 	flag.Parse()
+
+	// Load the service as a plugin
+	service, err := plugin.Open("service.so")
+	if err != nil {
+		sugar.Panicw("Failed to load service plugin", err)
+	}
+	NewServiceSymbol, err := service.Lookup("New")
+	if err != nil {
+		sugar.Panicw("Service plugin is missing 'New' method", err)
+	}
+	NewService := NewServiceSymbol.(func(logger *zap.SugaredLogger) proto.ServiceServer)
 
 	// clearly demarcates the scope in which each listener/socket may be used.
 	var g group.Group
@@ -48,7 +60,7 @@ func main() {
 
 			var opts []grpc.ServerOption
 			grpcServer := grpc.NewServer(opts...)
-			proto.RegisterServiceServer(grpcServer, service.New(sugar))
+			proto.RegisterServiceServer(grpcServer, NewService(sugar))
 			reflection.Register(grpcServer)
 			sugar.Infow("starting server")
 			return grpcServer.Serve(grpcListener)

@@ -7,10 +7,17 @@ Example usage:
 ```docker
 FROM knipknap/grpc-server-go:latest
 WORKDIR /app
-COPY go.mod .
-COPY pkg pkg
 COPY service.proto proto/
+COPY go.mod main.go service/
 ```
 
-Any .proto files that you put into the /proto folder will automatically be compiled on startup,
+The package name in main.go MUST be "main", and MUST have a function
+
+```go
+func New(logger *zap.SugaredLogger) proto.ServiceServer {
+}
+```
+
+Any .proto files that you put into the proto/ folder are automatically be compiled on startup,
 using protoc.
+Similarly, your plugin is also automatically compiled on startup.

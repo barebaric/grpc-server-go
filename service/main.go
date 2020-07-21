@@ -1,7 +1,7 @@
-package service
+package main
 
 import (
-	"grpc-server-go.local/proto"
+	"github.com/barebaric/grpc-server-go/proto"
 	"go.uber.org/zap"
 )
 

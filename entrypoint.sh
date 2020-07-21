@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
-cmd/compile.sh
-cmd/start
+./compile.sh
+server/cmd/start

@@ -1,4 +1,4 @@
-module grpc-server-go.local
+module github.com/barebaric/grpc-server-go
 
 go 1.14
 
