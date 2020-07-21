@@ -7,7 +7,6 @@ ENV GO111MODULE=on
 WORKDIR /app
 COPY compile.sh entrypoint.sh ./
 COPY server server
-COPY proto proto
 COPY service service
 
 RUN apk add --no-cache --update git curl unzip build-base autoconf automake libtool ca-certificates \

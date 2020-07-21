@@ -7,7 +7,7 @@ Example usage:
 ```docker
 FROM knipknap/grpc-server-go:latest
 WORKDIR /app
-COPY service.proto proto/
+COPY service.proto server/proto/
 COPY go.mod main.go service/
 ```
 
@@ -18,6 +18,10 @@ func New(logger *zap.SugaredLogger) proto.ServiceServer {
 }
 ```
 
-Any .proto files that you put into the proto/ folder are automatically be compiled during
-the build, using protoc.
+Any .proto files that you put into the server/proto/ folder are automatically
+compiled during the build, using protoc.
 Similarly, your plugin is also automatically compiled on startup.
+
+Important: The proto module is then available as
+
+    github.com/barebaric/grpc-server-go/proto
