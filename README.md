@@ -2,6 +2,8 @@
 
 Patches welcome!
 
+Runs a gRPC server, all you have to do is add .proto files and main.go.
+
 Example usage:
 
 ```docker
@@ -11,6 +13,7 @@ COPY service.proto server/proto/
 COPY go.mod main.go service/
 ```
 
+Default port is 8181.
 The package name in main.go MUST be "main", and MUST have a function
 
 ```go

@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	port = flag.Int("port", 80, "The server port")
+	port = flag.Int("port", 8181, "The server port")
 )
 
 var log grpclog.LoggerV2

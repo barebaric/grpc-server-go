@@ -18,5 +18,5 @@ RUN apk add --no-cache --update curl unzip build-base autoconf automake libtool 
     && unzip -o $PROTOC_ZIP -d /usr/local 'include/*' \
     && rm -f $PROTOC_ZIP
 
-EXPOSE 80
+EXPOSE 8181
 CMD ["./entrypoint.sh"]
