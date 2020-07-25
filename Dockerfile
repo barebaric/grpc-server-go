@@ -7,8 +7,8 @@ ENV GO111MODULE=on
 RUN apk add --no-cache --update curl && \
     GRPC_HEALTH_PROBE_VERSION=v0.3.1 && \
     curl -OL https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 && \
-    mv grpc_health_probe* grpc_health_probe && \
-    chmod +x grpc_health_probe
+    mv grpc_health_probe* /bin/grpc_health_probe && \
+    chmod +x /bin/grpc_health_probe
 
 RUN apk add --no-cache --update curl unzip build-base autoconf automake libtool ca-certificates \
     && go get google.golang.org/grpc \
