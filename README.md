@@ -1,45 +1,26 @@
 # gRPC server for Golang/protobuf
 
-Patches welcome!
+Base container that contains stuff commonly needed for Go gRPC microservices.
+Includes
 
-Runs a gRPC server, all you have to do is add .proto files and main.go.
+- Go
+- Protobuf + protoc
+- Health check
 
 Example usage:
 
 ```docker
-FROM knipknap/grpc-server-go:latest
+FROM grpc-server-go:latest
 WORKDIR /app
-COPY service.proto server/proto/
-COPY go.mod main.go service/
-```
+COPY go.mod Makefile ./
+COPY proto proto
+COPY server server
+COPY service service
+RUN make build
 
-Default port is 8181.
-The package name in main.go MUST be "main", and MUST have a function
-
-```go
-func New(logger *zap.SugaredLogger) proto.ServiceServer {
-}
-```
-
-Any .proto files that you put into the server/proto/ folder are automatically
-compiled during the build, using protoc.
-Similarly, your plugin is also automatically compiled on startup.
-
-Important: The proto module is then available as
-
-    github.com/barebaric/grpc-server-go/proto
-
-You can import it using the following in your mod file:
-
-```
-module your.module
-
-go 1.14
-
-require (
-	github.com/barebaric/grpc-server-go
-	...
-)
-
-replace github.com/barebaric/grpc-server-go => ../server
+FROM golang:1.13-alpine
+WORKDIR /app
+COPY --from=build-env /app/server/cmd/start .
+COPY --from=build-env /app/server/cmd/service.so .
+CMD ["./start"]
 ```
