@@ -10,7 +10,7 @@ Includes
 Example usage:
 
 ```docker
-FROM grpc-server-go:latest
+FROM knipknap/grpc-server-go:latest
 WORKDIR /app
 COPY go.mod Makefile ./
 COPY proto proto
