@@ -10,7 +10,7 @@ RUN apk add --no-cache --update curl && \
     mv grpc_health_probe* /bin/grpc_health_probe && \
     chmod +x /bin/grpc_health_probe
 
-RUN apk add --no-cache --update curl unzip build-base autoconf automake libtool ca-certificates \
+RUN apk add --no-cache --update git unzip build-base autoconf automake libtool ca-certificates \
     && go get google.golang.org/grpc \
     && go get github.com/golang/protobuf/protoc-gen-go \
     && go get -u -v github.com/golang/protobuf/proto \
