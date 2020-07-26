@@ -1,6 +1,6 @@
 # gRPC server for Golang/protobuf
 
-Base container that contains stuff commonly needed for Go gRPC microservices.
+Base container that contains stuff commonly needed to compile Go gRPC microservices.
 Includes
 
 - Go
