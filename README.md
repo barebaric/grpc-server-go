@@ -5,4 +5,4 @@ Includes
 
 - Go
 - Protobuf + protoc
-- Health check
+- grpc-health-probe
